@@ -39,10 +39,10 @@ Thumbs.db
 .jarvis/
 .mcp.json
 CLAUDE.md
-AGENTS.md
 brief.md
 image.png
 design/pasted-image-*
+specs/
 
 # Local auth stores and generated operational artifacts
 .paperclip/

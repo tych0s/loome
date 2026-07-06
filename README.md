@@ -15,8 +15,11 @@ game. The game starts empty and evolves through public, auditable cycles.
 
 ## Current Status
 
-This repository is in bootstrap stage. The public documentation and safety rules
-are being prepared before the application skeleton is added.
+The public documentation, safety rules and the first monorepo skeleton are in
+place: the game SDK contract (`packages/game-sdk`), the implementation brief
+and public event schemas (`packages/shared`), a placeholder game workspace
+(`apps/game`) and the CI security gates. The platform, admin and worker
+applications are added as they gain real content.
 
 ## Planned Architecture
 
@@ -56,15 +59,21 @@ docs                   Public architecture and security documentation
 - [Contributing](CONTRIBUTING.md)
 - [Agent Instructions](docs/agent-instructions.md)
 - [Agent Sandbox](docs/agent-sandbox.md)
+- [Implementation Backend](docs/implementation-backend.md)
 - [Versioning](docs/versioning.md)
 - [Deployment](docs/deployment.md)
 - [Security Controls](docs/security-controls.md)
 
 ## Local Development
 
-The runnable application skeleton has not been committed yet. When it exists,
-setup commands and required environment variables will be documented here and in
-`.env.example`.
+```sh
+pnpm install     # install dependencies (lockfile is authoritative)
+pnpm check       # Biome lint + format check
+pnpm typecheck   # strict TypeScript across workspaces
+pnpm test        # Vitest across workspaces
+```
+
+Required environment variables are documented by name in `.env.example`.
 
 Do not put real secrets in `.env.example` or any committed file.
 
@@ -79,3 +88,10 @@ Before publishing, pushing or opening a public PR, run:
 The check scans Git-public candidate files and fails on internal system
 references, blocked local metadata files, environment files and common secret
 patterns.
+
+## License
+
+- Platform, admin, workers and core packages: [AGPL-3.0](LICENSE).
+- `packages/game-sdk`: MIT (see `packages/game-sdk/LICENSE`).
+- The Loome name and logo are not covered by the code licenses and may not be
+  used to represent forks or derived services.

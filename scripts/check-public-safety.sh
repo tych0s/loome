@@ -17,11 +17,11 @@ blocked_paths=(
   ".claude/"
   ".jarvis/"
   ".mcp.json"
-  "AGENTS.md"
   "CLAUDE.md"
   "brief.md"
   "image.png"
   "design/pasted-image-"
+  "specs/"
 )
 
 failed=0
@@ -44,6 +44,8 @@ scan_files=()
 for file in "${files[@]}"; do
   [[ "$file" == ".gitignore" ]] && continue
   [[ "$file" == "scripts/check-public-safety.sh" ]] && continue
+  # Lockfiles are machine-generated; integrity hashes trip the long-token scan.
+  [[ "$file" == "pnpm-lock.yaml" ]] && continue
   [[ -f "$file" ]] && scan_files+=("$file")
 done
 
