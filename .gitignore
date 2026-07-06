@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+.output/
+.tanstack/
+.turbo/
+coverage/
+playwright-report/
+test-results/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.csr
+*.dump
+*.bak
+*.sqlite
+*.sqlite3
+*.db
+
+# Local editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Agent/runtime metadata not meant for the public repository
+.claude/
+.jarvis/
+.mcp.json
+CLAUDE.md
+AGENTS.md
+brief.md
+image.png
+design/pasted-image-*
+
+# Local auth stores and generated operational artifacts
+.paperclip/
+.graphify*/
+graphify-out/
