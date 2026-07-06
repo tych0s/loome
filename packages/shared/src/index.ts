@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export * from "./versions.ts";
+
 /** The only path prefix the implementation backend may write to. */
 export const GAME_WORKSPACE_PREFIX = "apps/game/";
 

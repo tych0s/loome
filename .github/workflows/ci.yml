@@ -47,3 +47,14 @@ jobs:
       - run: pnpm check
       - run: pnpm typecheck
       - run: pnpm test
+      - run: pnpm build
+      - name: Release dry run (immutable archive)
+        run: |
+          pnpm release:game --cycle 0 --build 0 --summary "CI dry run" --out /tmp/loome-archive
+          if pnpm release:game --cycle 0 --build 0 --summary "CI dry run" --out /tmp/loome-archive; then
+            echo "immutability violated: duplicate release succeeded" >&2
+            exit 1
+          fi
+          test -f /tmp/loome-archive/v/0.0.0/index.html
+          test -f /tmp/loome-archive/current/index.html
+          test -f /tmp/loome-archive/versions.json

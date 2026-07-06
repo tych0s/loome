@@ -26,6 +26,9 @@ importers:
       typescript:
         specifier: ^5.9.0
         version: 5.9.3
+      vite:
+        specifier: ^7.0.0
+        version: 7.3.6(@types/node@22.20.0)
 
   packages/game-sdk:
     devDependencies:
