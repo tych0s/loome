@@ -67,3 +67,15 @@ setup commands and required environment variables will be documented here and in
 `.env.example`.
 
 Do not put real secrets in `.env.example` or any committed file.
+
+## Public Safety Check
+
+Before publishing, pushing or opening a public PR, run:
+
+```sh
+./scripts/check-public-safety.sh
+```
+
+The check scans Git-public candidate files and fails on internal system
+references, blocked local metadata files, environment files and common secret
+patterns.

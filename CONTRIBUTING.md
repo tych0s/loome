@@ -18,6 +18,7 @@ should preserve that model.
 - Add or update tests when behavior changes.
 - Document new environment variables in `.env.example`.
 - Do not weaken the game sandbox, AI implementer boundary or deployment gates.
+- Run `./scripts/check-public-safety.sh` before opening a public PR.
 
 ## Commit Style
 

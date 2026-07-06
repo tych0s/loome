@@ -19,6 +19,8 @@ maintainer will provide a private channel.
 - Database backups, user exports or private logs.
 - Vulnerability exploit details before maintainers have triaged the issue.
 
+Run `./scripts/check-public-safety.sh` before publishing repository contents.
+
 ## Supported Scope
 
 The project is in bootstrap stage. Security support applies to the current
