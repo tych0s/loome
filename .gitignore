@@ -43,6 +43,7 @@ brief.md
 image.png
 design/pasted-image-*
 specs/
+.infisical.json
 
 # Local auth stores and generated operational artifacts
 .paperclip/

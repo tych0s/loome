@@ -22,6 +22,7 @@ blocked_paths=(
   "image.png"
   "design/pasted-image-"
   "specs/"
+  ".infisical.json"
 )
 
 failed=0
