@@ -18,8 +18,9 @@ game. The game starts empty and evolves through public, auditable cycles.
 The public documentation, safety rules and the first monorepo skeleton are in
 place: the game SDK contract (`packages/game-sdk`), the implementation brief
 and public event schemas (`packages/shared`), a placeholder game workspace
-(`apps/game`) and the CI security gates. The platform, admin and worker
-applications are added as they gain real content.
+(`apps/game`), the implementation backend adapter (`workers/implementer`) and
+the CI security gates. The platform and admin applications are added as they
+gain real content.
 
 ## Planned Architecture
 
