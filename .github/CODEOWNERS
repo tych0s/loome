@@ -1,0 +1,13 @@
+# Default owners for everything not matched below.
+* @loome/core
+
+# Security-sensitive paths require security review.
+/.github/workflows/ @loome/security
+/scripts/ @loome/security
+/packages/game-sdk/ @loome/core @loome/security
+SECURITY.md @loome/security
+THREAT_MODEL.md @loome/security
+/docs/security-controls.md @loome/security
+
+# Game workspace: the only path the autonomous implementer may change.
+/apps/game/ @loome/game

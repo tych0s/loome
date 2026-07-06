@@ -1,0 +1,21 @@
+{
+  "name": "loome",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "safety": "./scripts/check-public-safety.sh"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0",
+    "turbo": "^2.5.0",
+    "typescript": "^5.9.0"
+  }
+}

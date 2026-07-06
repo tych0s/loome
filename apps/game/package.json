@@ -1,0 +1,13 @@
+{
+  "name": "loome-game",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@loome/game-sdk": "workspace:*",
+    "typescript": "^5.9.0"
+  }
+}
