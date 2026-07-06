@@ -25,7 +25,9 @@ contract and does not authenticate users or connect to the database directly.
 ### Workers
 
 Workers coordinate cycle timing, NPC participation, proposal synthesis and the
-constrained AI implementation flow.
+constrained AI implementation flow. The implementation worker should act as an
+adapter to a protected implementation backend rather than exposing private
+execution infrastructure to the public platform.
 
 ## Planned Monorepo Layout
 
@@ -51,6 +53,8 @@ docs
 - Synthesized proposals are the only input passed to the implementer.
 - The implementer is untrusted relative to platform, database and deployment
   systems.
+- The implementation backend is private infrastructure and must be represented
+  publicly only through Loome-owned run IDs and sanitized events.
 - Production deploys require protected CI and maintainer-controlled secrets.
 
 ## Data Flow Summary
@@ -58,7 +62,8 @@ docs
 1. Users and NPCs discuss possible game changes.
 2. The synthesizer turns discussion into safe, bounded proposals.
 3. The community votes on proposals, including a fixed revert option.
-4. The implementer receives the winning sanitized proposal.
-5. The implementer writes only to the game workspace.
+4. The synthesizer creates a bounded implementation brief.
+5. The implementation backend receives the brief and writes only to the game
+   workspace.
 6. CI validates the change.
 7. A successful release is versioned, deployed and archived.

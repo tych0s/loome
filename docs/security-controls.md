@@ -26,6 +26,16 @@ This is the initial control checklist for Loome.
 - Validate implementer diffs and logs.
 - Prevent implementer-initiated production deploys.
 
+## Implementation Backend Controls
+
+- Use neutral public names for the backend contract.
+- Keep concrete backend hosts, tokens and auth flows out of the public repo.
+- Store backend credentials only in the deployment secret manager.
+- Accept backend events only through authenticated webhooks or server-side
+  polling.
+- Convert private backend run IDs into Loome-owned public run IDs before
+  displaying them.
+
 ## Logging Controls
 
 - Redact secrets and token-like values.

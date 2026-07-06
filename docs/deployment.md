@@ -30,6 +30,16 @@ Before production deploy, CI should verify:
 - Secret scanning.
 - Build success.
 
+## Implementation Backend
+
+Autonomous game implementation runs may be executed by a protected backend. The
+public repository must describe only the neutral contract. Concrete backend
+hosts, tokens, auth flows, runbook details and operator paths belong in private
+deployment configuration.
+
+The backend may produce previews automatically. Production game promotion should
+require passing path, build, test and public-safety gates.
+
 ## Rollback
 
 Rollbacks should create an auditable release record. The community voting cycle
