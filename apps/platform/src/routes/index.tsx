@@ -4,8 +4,8 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-/** Game archive origin; configured per environment, never hardcoded. */
-const GAME_ARCHIVE_URL = import.meta.env.VITE_GAME_ARCHIVE_URL ?? "/play";
+/** Server-side redirect to the archive (origin is deployment config). */
+const GAME_ARCHIVE_URL = "/play";
 
 const PIPELINE = [
   {
