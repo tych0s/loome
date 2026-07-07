@@ -10,6 +10,7 @@ short operational version.
 ## Repository Shape
 
 ```txt
+apps/platform          Community platform (TanStack Start)
 apps/game              Browser game workspace (only implementer-writable path)
 packages/game-sdk      Platform <-> game type contract (MIT licensed)
 packages/shared        Shared schemas: implementation brief, public run events
