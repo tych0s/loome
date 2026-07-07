@@ -13,6 +13,7 @@ short operational version.
 apps/game              Browser game workspace (only implementer-writable path)
 packages/game-sdk      Platform <-> game type contract (MIT licensed)
 packages/shared        Shared schemas: implementation brief, public run events
+packages/db            Drizzle schema and SQL migrations
 workers/implementer    Adapter to the protected implementation backend
 docs                   Public architecture and security documentation
 scripts                Safety and CI gate scripts
