@@ -1,13 +1,17 @@
-# Default owners for everything not matched below.
-* @loome/core
+# Solo-maintainer phase: all ownership routes to the repository owner.
+# When the project gains maintainers (or moves to an organization), replace
+# these with team-based owners (e.g. core/security/game teams).
 
-# Security-sensitive paths require security review.
-/.github/workflows/ @loome/security
-/scripts/ @loome/security
-/packages/game-sdk/ @loome/core @loome/security
-SECURITY.md @loome/security
-THREAT_MODEL.md @loome/security
-/docs/security-controls.md @loome/security
+# Default owner for everything not matched below.
+* @tych0s
+
+# Security-sensitive paths require explicit owner review.
+/.github/workflows/ @tych0s
+/scripts/ @tych0s
+/packages/game-sdk/ @tych0s
+SECURITY.md @tych0s
+THREAT_MODEL.md @tych0s
+/docs/security-controls.md @tych0s
 
 # Game workspace: the only path the autonomous implementer may change.
-/apps/game/ @loome/game
+/apps/game/ @tych0s
