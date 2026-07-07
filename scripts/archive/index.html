@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loome — Game Archive</title>
+    <meta
+      name="description"
+      content="Every version of the Loome community game, archived and playable forever."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0d12'/%3E%3Cpath d='M10 8v13h12' fill='none' stroke='%237c5cff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0d12;
+        --panel: #11141a;
+        --line: #1f242a;
+        --line-hover: #343c46;
+        --text: #e6e9ef;
+        --muted: #9aa3ad;
+        --faint: #5a6470;
+        --accent-a: #7c5cff;
+        --accent-b: #4bd1c5;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(60rem 30rem at 70% -10%, rgba(124, 92, 255, 0.12), transparent 60%),
+          radial-gradient(50rem 25rem at 10% -15%, rgba(75, 209, 197, 0.08), transparent 60%),
+          var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+      .page {
+        max-width: 44rem;
+        margin: 0 auto;
+        padding: 4.5rem 1.5rem 4rem;
+      }
+      .wordmark {
+        font-size: clamp(2.6rem, 7vw, 3.6rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        background: linear-gradient(100deg, var(--accent-a), var(--accent-b));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: 0;
+      }
+      .tagline {
+        color: var(--muted);
+        font-size: 1.05rem;
+        max-width: 34rem;
+        margin: 0.9rem 0 2rem;
+      }
+      .play {
+        display: inline-block;
+        padding: 0.7rem 1.5rem;
+        border-radius: 999px;
+        background: linear-gradient(100deg, var(--accent-a), var(--accent-b));
+        color: #0b0d12;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .play:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 24px rgba(124, 92, 255, 0.35);
+      }
+      h2 {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--faint);
+        margin: 3.5rem 0 1rem;
+      }
+      .versions {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.75rem;
+      }
+      .versions li {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        transition: border-color 0.15s ease;
+      }
+      .versions li:hover {
+        border-color: var(--line-hover);
+      }
+      .v-meta {
+        min-width: 7.5rem;
+      }
+      .v-name {
+        font-weight: 650;
+        font-size: 1.05rem;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-b);
+        border: 1px solid rgba(75, 209, 197, 0.35);
+        border-radius: 999px;
+        padding: 0.1rem 0.5rem;
+        margin-left: 0.5rem;
+        vertical-align: 2px;
+      }
+      .v-date {
+        color: var(--faint);
+        font-size: 0.8rem;
+        margin-top: 0.15rem;
+      }
+      .v-summary {
+        flex: 1;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+      .v-play {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 600;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.4rem 1rem;
+        white-space: nowrap;
+        transition: border-color 0.15s ease, background 0.15s ease;
+      }
+      .v-play:hover {
+        border-color: var(--accent-a);
+        background: rgba(124, 92, 255, 0.1);
+      }
+      .empty {
+        color: var(--faint);
+        justify-content: center;
+      }
+      footer {
+        margin-top: 4rem;
+        color: var(--faint);
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+      }
+      @media (max-width: 560px) {
+        .versions li {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+        .v-play {
+          align-self: stretch;
+          text-align: center;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .play,
+        .play:hover {
+          transition: none;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <h1 class="wordmark">Loome</h1>
+        <p class="tagline">
+          A game the community designs, votes on and watches being built in
+          public. Every released version is archived here and stays playable
+          forever.
+        </p>
+        <a class="play" href="./current/">Play the current version</a>
+      </header>
+      <main>
+        <h2>Version archive</h2>
+        <ol id="versions" class="versions">
+          <li class="empty">Loading releases…</li>
+        </ol>
+      </main>
+      <footer>Open source — every change is public and auditable.</footer>
+    </div>
+    <script>
+      const list = document.getElementById("versions");
+      const show = (message) => {
+        list.replaceChildren();
+        const li = document.createElement("li");
+        li.className = "empty";
+        li.textContent = message;
+        list.append(li);
+      };
+      fetch("./versions.json", { cache: "no-store" })
+        .then((res) => (res.ok ? res.json() : Promise.reject(new Error(res.status))))
+        .then((manifest) => {
+          const versions = (manifest.versions ?? []).slice().reverse();
+          if (versions.length === 0) {
+            show("No releases yet — cycle zero is coming.");
+            return;
+          }
+          list.replaceChildren();
+          versions.forEach((entry, index) => {
+            const li = document.createElement("li");
+
+            const meta = document.createElement("div");
+            meta.className = "v-meta";
+            const name = document.createElement("div");
+            name.className = "v-name";
+            name.textContent = `v${entry.version}`;
+            if (index === 0) {
+              const badge = document.createElement("span");
+              badge.className = "badge";
+              badge.textContent = "latest";
+              name.append(badge);
+            }
+            const date = document.createElement("div");
+            date.className = "v-date";
+            const created = new Date(entry.createdAt);
+            date.textContent = Number.isNaN(created.valueOf())
+              ? ""
+              : created.toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                });
+            meta.append(name, date);
+
+            const summary = document.createElement("div");
+            summary.className = "v-summary";
+            summary.textContent = entry.publicSummary ?? "";
+
+            const play = document.createElement("a");
+            play.className = "v-play";
+            play.href = `./v/${encodeURIComponent(entry.version)}/`;
+            play.textContent = "Play";
+
+            li.append(meta, summary, play);
+            list.append(li);
+          });
+        })
+        .catch(() => show("Could not load the release list."));
+    </script>
+  </body>
+</html>

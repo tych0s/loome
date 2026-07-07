@@ -58,3 +58,4 @@ jobs:
           test -f /tmp/loome-archive/v/0.0.0/index.html
           test -f /tmp/loome-archive/current/index.html
           test -f /tmp/loome-archive/versions.json
+          test -f /tmp/loome-archive/index.html

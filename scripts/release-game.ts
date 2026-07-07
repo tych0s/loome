@@ -7,6 +7,7 @@
  *   v/<version>/    immutable copy of the game build (never overwritten)
  *   current/        mutable alias pointing at the latest release
  *   versions.json   append-only release manifest (game_versions record)
+ *   index.html      archive landing page (copied from scripts/archive/)
  *
  * Usage:
  *   node --experimental-strip-types scripts/release-game.ts \
@@ -94,6 +95,10 @@ cpSync(gameDist, versionDir, { recursive: true });
 const currentDir = path.join(outDir, "current");
 rmSync(currentDir, { recursive: true, force: true });
 cpSync(gameDist, currentDir, { recursive: true });
+cpSync(
+  path.join(repoRoot, "scripts/archive/index.html"),
+  path.join(outDir, "index.html"),
+);
 writeFileSync(manifestPath, `${JSON.stringify(nextManifest, null, 2)}\n`);
 
 console.log(`released game version ${version} (${gameVersionTag(version)})`);
