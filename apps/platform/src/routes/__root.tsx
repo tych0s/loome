@@ -18,7 +18,10 @@ export const Route = createRootRoute({
           "Propose, vote and watch an AI implement the community game in public. Every version stays playable forever.",
       },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "stylesheet", href: appCss },
+    ],
   }),
   component: RootComponent,
 });
