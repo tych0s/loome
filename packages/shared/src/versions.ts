@@ -15,6 +15,15 @@ export const gameVersionRecordSchema = z
     proposalId: z.string().min(1),
     publicSummary: z.string().min(1).max(1000),
     createdAt: z.string().min(1),
+    /**
+     * Build screenshot, stored immutably beside the release and addressed
+     * relative to the archive root. Omitted when no browser was available to
+     * capture it or a non-visual release opted out.
+     */
+    screenshot: z
+      .string()
+      .regex(/^v\/0\.\d+\.\d+\/screenshot\.png$/)
+      .optional(),
   })
   .strict();
 

@@ -29,6 +29,17 @@ describe("gameVersionRecordSchema", () => {
       gameVersionRecordSchema.parse({ ...record, gitTag: "v0.12.3" }),
     ).toThrow();
   });
+
+  it("accepts an optional build screenshot addressed under the archive", () => {
+    const withShot = { ...record, screenshot: "v/0.12.3/screenshot.png" };
+    expect(gameVersionRecordSchema.parse(withShot)).toEqual(withShot);
+  });
+
+  it("rejects screenshot paths that escape the archive", () => {
+    expect(() =>
+      gameVersionRecordSchema.parse({ ...record, screenshot: "../secret.png" }),
+    ).toThrow();
+  });
 });
 
 describe("gameVersionTag", () => {
