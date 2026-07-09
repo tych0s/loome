@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   implementationBriefSchema,
+  publicRunEventRecordSchema,
   publicRunEventSchema,
   publicRunIdSchema,
 } from "./index";
@@ -45,6 +46,52 @@ describe("publicRunEventSchema", () => {
 
   it("rejects events outside the closed enum", () => {
     expect(() => publicRunEventSchema.parse("raw_log_line")).toThrow();
+  });
+});
+
+describe("publicRunEventRecordSchema", () => {
+  it("accepts a typed event without a screenshot", () => {
+    expect(publicRunEventRecordSchema.parse({ type: "diff_ready" })).toEqual({
+      type: "diff_ready",
+    });
+  });
+
+  it("accepts a typed event with a public screenshot url", () => {
+    const event = {
+      type: "preview_ready",
+      screenshot: "https://cdn.loome.example/runs/run_ab12cd34.png",
+    };
+    expect(publicRunEventRecordSchema.parse(event)).toEqual(event);
+  });
+
+  it("rejects non-https or non-image screenshots", () => {
+    expect(() =>
+      publicRunEventRecordSchema.parse({
+        type: "preview_ready",
+        screenshot: "http://cdn.loome.example/x.png",
+      }),
+    ).toThrow();
+    expect(() =>
+      publicRunEventRecordSchema.parse({
+        type: "preview_ready",
+        screenshot: "https://cdn.loome.example/x.gif",
+      }),
+    ).toThrow();
+  });
+
+  it("rejects event types outside the closed enum", () => {
+    expect(() =>
+      publicRunEventRecordSchema.parse({ type: "raw_log_line" }),
+    ).toThrow();
+  });
+
+  it("rejects unknown fields so no raw backend data leaks", () => {
+    expect(() =>
+      publicRunEventRecordSchema.parse({
+        type: "diff_ready",
+        backendUrl: "https://internal.example/run/9.png",
+      }),
+    ).toThrow();
   });
 });
 

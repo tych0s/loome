@@ -57,6 +57,30 @@ export type PublicRunEvent = (typeof PUBLIC_RUN_EVENTS)[number];
 export const publicRunEventSchema = z.enum(PUBLIC_RUN_EVENTS);
 
 /**
+ * Sanitized screenshot reference for a public run event: a public HTTPS image
+ * URL owned by Loome. Never a backend or private URL (D8); the closed-enum
+ * event type stays the security anchor and this only carries public artifacts.
+ */
+export const publicRunScreenshotSchema = z
+  .string()
+  .max(2048)
+  .regex(/^https:\/\/\S+\.(png|webp)$/);
+
+/**
+ * A single sanitized run-log entry: a closed-enum event type plus optional
+ * public artifacts. This is the only run-event shape public surfaces persist
+ * or display; raw backend logs never take this form.
+ */
+export const publicRunEventRecordSchema = z
+  .object({
+    type: publicRunEventSchema,
+    screenshot: publicRunScreenshotSchema.optional(),
+  })
+  .strict();
+
+export type PublicRunEventRecord = z.infer<typeof publicRunEventRecordSchema>;
+
+/**
  * Public run identifier owned by Loome. Private backend run identifiers must
  * be mapped to this format before being displayed anywhere public.
  */

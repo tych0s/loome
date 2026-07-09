@@ -175,7 +175,11 @@ export const agentRuns = pgTable("agent_runs", {
   publicRunId: text("public_run_id").notNull().unique(),
   backendRunId: text("backend_run_id").notNull(),
   state: runState("state").notNull().default("queued"),
-  /** Sanitized PublicRunEvent list (closed enum in @loome/shared). */
+  /**
+   * Sanitized PublicRunEventRecord list (closed-enum type + optional public
+   * screenshot url) from @loome/shared. jsonb, so the entry shape can carry
+   * artifacts without a column migration.
+   */
   events: jsonb("events").notNull().default([]),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()

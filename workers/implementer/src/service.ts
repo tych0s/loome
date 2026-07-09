@@ -3,7 +3,8 @@ import {
   type ImplementationBrief,
   implementationBriefSchema,
   type PublicRunEvent,
-  publicRunEventSchema,
+  type PublicRunEventRecord,
+  publicRunEventRecordSchema,
 } from "@loome/shared";
 import type { BackendClient, BackendRunState } from "./backend-client";
 
@@ -18,7 +19,7 @@ interface RunRecord {
   backendRunId: string;
   brief: ImplementationBrief;
   state: BackendRunState;
-  events: PublicRunEvent[];
+  events: PublicRunEventRecord[];
 }
 
 /** Public projection of a run. Contains no backend identifiers. */
@@ -26,12 +27,24 @@ export interface PublicRunView {
   publicRunId: string;
   state: BackendRunState;
   publicSummary: string;
-  events: PublicRunEvent[];
+  events: PublicRunEventRecord[];
 }
 
-/** Every event passes the closed public enum before it is stored or shown. */
-function emit(record: RunRecord, event: PublicRunEvent): void {
-  record.events.push(publicRunEventSchema.parse(event));
+/**
+ * Appends a sanitized run-log entry. The closed enum validates the type and an
+ * optional public screenshot url is carried through; the schema strips anything
+ * else so no raw backend data can ride along.
+ */
+function emit(
+  record: RunRecord,
+  type: PublicRunEvent,
+  screenshot?: string,
+): PublicRunEventRecord {
+  const event = publicRunEventRecordSchema.parse(
+    screenshot === undefined ? { type } : { type, screenshot },
+  );
+  record.events.push(event);
+  return event;
 }
 
 function eventForState(state: BackendRunState): PublicRunEvent | null {
@@ -81,7 +94,7 @@ export class ImplementerService {
   }
 
   /** Polls the backend once and returns newly emitted public events. */
-  async poll(publicRunId: string): Promise<PublicRunEvent[]> {
+  async poll(publicRunId: string): Promise<PublicRunEventRecord[]> {
     const record = this.require(publicRunId);
     if (record.state === "delivered" || record.state === "failed") {
       return [];
@@ -95,8 +108,7 @@ export class ImplementerService {
     if (!event) {
       return [];
     }
-    emit(record, event);
-    return [event];
+    return [emit(record, event)];
   }
 
   /** Admin kill switch: cancels the backend run and fails the public run. */

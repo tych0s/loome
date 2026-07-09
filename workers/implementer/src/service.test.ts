@@ -33,7 +33,7 @@ describe("ImplementerService", () => {
   it("starts a run and emits run_created", async () => {
     const service = new ImplementerService(stubClient());
     const run = await service.startRun(validBrief);
-    expect(run.events).toEqual(["run_created"]);
+    expect(run.events).toEqual([{ type: "run_created" }]);
     expect(run.state).toBe("queued");
     expect(run.publicRunId).toMatch(/^run_[a-z0-9]{8,32}$/);
   });
@@ -58,11 +58,13 @@ describe("ImplementerService", () => {
     });
     const service = new ImplementerService(client);
     const run = await service.startRun(validBrief);
-    expect(await service.poll(run.publicRunId)).toEqual(["diff_ready"]);
+    expect(await service.poll(run.publicRunId)).toEqual([
+      { type: "diff_ready" },
+    ]);
     expect(await service.poll(run.publicRunId)).toEqual([]);
     expect(service.getRun(run.publicRunId)?.events).toEqual([
-      "run_created",
-      "diff_ready",
+      { type: "run_created" },
+      { type: "diff_ready" },
     ]);
   });
 
@@ -72,7 +74,9 @@ describe("ImplementerService", () => {
     });
     const service = new ImplementerService(client);
     const run = await service.startRun(validBrief);
-    expect(await service.poll(run.publicRunId)).toEqual(["run_failed"]);
+    expect(await service.poll(run.publicRunId)).toEqual([
+      { type: "run_failed" },
+    ]);
   });
 
   it("emits nothing while the backend is still working", async () => {
@@ -89,7 +93,10 @@ describe("ImplementerService", () => {
     const killed = await service.kill(run.publicRunId);
     expect(client.cancelRun).toHaveBeenCalledWith("backend-item-77");
     expect(killed.state).toBe("failed");
-    expect(killed.events).toEqual(["run_created", "run_failed"]);
+    expect(killed.events).toEqual([
+      { type: "run_created" },
+      { type: "run_failed" },
+    ]);
   });
 
   it("kill switch is a no-op on terminal runs", async () => {
