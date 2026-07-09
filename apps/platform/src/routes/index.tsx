@@ -47,6 +47,13 @@ function Home() {
           </div>
           <div className="flex flex-wrap gap-3">
             <a
+              href="/runs"
+              className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 font-semibold text-fg transition hover:border-line-strong"
+            >
+              <Radio aria-hidden="true" className="size-4" />
+              Live run
+            </a>
+            <a
               href="https://github.com/tych0s/loome"
               className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 font-semibold text-fg transition hover:border-line-strong"
             >
