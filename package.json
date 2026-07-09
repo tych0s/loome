@@ -6,6 +6,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "dev": "pnpm --filter loome-platform dev",
     "check": "biome check .",
     "check:fix": "biome check --write .",
     "typecheck": "turbo run typecheck",
