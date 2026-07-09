@@ -17,3 +17,23 @@ body {
   background: linear-gradient(180deg, #11140f 0%, var(--color-ink) 44%, #11110d);
   color: var(--color-fg);
 }
+
+@keyframes loome-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.loome-float {
+  animation: loome-float 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loome-float {
+    animation: none;
+  }
+}
